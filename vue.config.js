@@ -15,6 +15,6 @@ module.exports = defineConfig({
         gifsicle: { optimizationLevel: 3 },
         webp: { quality: 75 },
       })
-      .end()
-  }
+      .end();
+  },
 });
