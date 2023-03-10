@@ -1,7 +1,20 @@
-import Search from "../components/Search.vue";
+import Search from '../components/SearchComponent.vue';
+
 export default {
-  title: "Search",
+  title: 'Search',
   component: Search,
 };
 
-export const Default = () => <Search />;
+const Template = (args) => ({
+  components: { Search },
+  setup() {
+    return { args };
+  },
+  template: '<search-section v-bind="args" />',
+});
+
+export const Default = Template.bind({});
+Default.args = {
+  primary: true,
+  label: 'Search',
+};

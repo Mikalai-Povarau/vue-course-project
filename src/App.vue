@@ -1,30 +1,18 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/details">Details</router-link>
-  </nav>
-  <router-view />
+  <main>
+    <router-view></router-view>
+  </main>
+  <footer>
+    <LogoComponent :primary="true" size="large" />
+  </footer>
 </template>
+<script setup lang="ts">
+import LogoComponent from './components/LogoComponent.vue';
+import { onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+const store = useStore();
+onBeforeMount(() => {
+  store.dispatch('fetchFilms');
+});
+</script>
