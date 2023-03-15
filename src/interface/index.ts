@@ -20,4 +20,18 @@ export interface IFilm {
   releaseDate: string;
   genres: Array<string>;
   rating: number;
+  description: string;
+}
+
+export interface IApiFilm {
+  id: number;
+  title: string;
+  posterurl: string;
+  imdbRating: number;
+  actors: Array<string>;
+  storyline: string;
+  releaseDate: string;
+  duration: string;
+  genres: Array<string>;
+  ratings: Array<number>;
 }

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from './pages/HomeVies.vue';
 import FilmDetailsView from './pages/FilmDetailsView.vue';
+import ErrorView from './pages/ErrorView.vue';
 
 export default createRouter({
   history: createWebHistory(),
@@ -13,9 +14,9 @@ export default createRouter({
       props: (route) => {
         return {
           ...route.params,
-          searchValue: route.query.sv,
-          searchBy: Number(route.query.sb ?? 0),
-          sortBy: Number(route.query.sort ?? 0),
+          searchValue: route.query.query,
+          searchBy: Number(route.query.searchBy ?? 0),
+          sortBy: Number(route.query.sortBy ?? 0),
         };
       },
     },
@@ -28,6 +29,10 @@ export default createRouter({
           ...{ filmId: Number(route.params.filmId) },
         };
       },
+    },
+    {
+      path: '/:catchAll(.*)',
+      component: ErrorView,
     },
   ],
 });

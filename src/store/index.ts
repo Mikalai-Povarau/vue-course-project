@@ -1,8 +1,5 @@
 import { createStore } from 'vuex';
-import { IFilm, SearchBy, SortBy } from '@/interface';
-import films from '../mock/films';
-
-const filmsMocked = films;
+import { IApiFilm, IFilm, SearchBy, SortBy } from '@/interface';
 
 export default createStore({
   strict: true,
@@ -72,19 +69,28 @@ export default createStore({
       commit('updateSearchData', searchData);
     },
     fetchFilms: async ({ commit }) => {
-      const data = filmsMocked;
-      //fetch from real API instead
+      let data: Array<IApiFilm> = [];
+      const url = 'https://tame-erin-pike-toga.cyclic.app/movies';
 
-      //norm
+      const fetchAPI = async () => {
+        try {
+          const response = await fetch(url);
+          data = await response.json();
+        } catch (error: unknown) {
+          console.log(error as Error);
+        }
+      };
+      await fetchAPI();
+
       const films = data?.map((item) => {
         return {
           id: item.id,
-          posterPath: item.posterPath,
+          posterPath: item.posterurl,
           title: item.title,
           releaseDate: item.releaseDate,
           genres: item.genres,
-          rating: item.rating,
-          description: item.description,
+          rating: item.imdbRating,
+          description: item.storyline,
         };
       });
       commit('updateProductsData', films);

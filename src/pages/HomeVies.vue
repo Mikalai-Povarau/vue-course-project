@@ -67,9 +67,9 @@ const updateSearchData = ({
   router.push({
     path: 'search',
     query: {
-      sv: searchValue,
-      sb: Number(searchBy).toString(),
-      sort: Number(sortBy).toString(),
+      query: searchValue,
+      searchBy: Number(searchBy).toString(),
+      sortBy: Number(sortBy).toString(),
     },
   });
 };
